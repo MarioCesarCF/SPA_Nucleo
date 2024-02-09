@@ -1,0 +1,65 @@
+.pageContainer {
+  position: relative;
+  min-height: 85vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contentWrap {
+  padding-bottom: 3.5rem;
+}
+
+.main {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  width: 30rem;
+  height: 30rem;
+  background-image: url("../../public/images/fundo-nucleo-removebg-preview.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.login_form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.login_form>h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.login_form>input {
+  width: 20rem;
+  border-radius: 5px;
+}
+
+.esqueceu_senha {
+  font-size: 12px;
+}
+.esqueceu_senha:hover {
+  text-shadow: 0 0 3px #8cf819;
+}
+
+.button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #cef6a3;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+.button:hover {
+  border-color: #303132;
+}

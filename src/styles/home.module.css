@@ -1,0 +1,11 @@
+.btn_icon>i {
+    padding: 5px;   
+    border: 1px black solid; 
+    margin: 0 1px;
+    width: 30px;
+    border-radius: 5px;
+}
+
+.btn_icon>i:hover {
+    background-color: rgb(233, 237, 240);
+}

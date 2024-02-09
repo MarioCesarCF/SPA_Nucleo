@@ -1,0 +1,29 @@
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #303132;
+  padding-right: 1rem;
+}
+
+.profileContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile {
+  display: flex;
+  gap: 1rem;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.navigation {
+  color: #ffffff;
+  display: flex;
+  gap: 1rem;
+  padding-right: 1rem;
+}
