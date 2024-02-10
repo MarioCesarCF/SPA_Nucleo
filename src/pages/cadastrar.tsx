@@ -1,11 +1,11 @@
 import CreateCompany from "@/components/specifics/CreateCompany";
 import Head from "next/head";
 
-export default function Login() {
+export default function Cadastro() {
   return (
     <>
       <Head>
-        <title>Login | Núcleo Ambiental</title>
+        <title>Cadastro | Núcleo Ambiental</title>
       </Head>
       <CreateCompany />     
     </>

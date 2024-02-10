@@ -9,3 +9,85 @@
 .btn_icon>i:hover {
     background-color: rgb(233, 237, 240);
 }
+
+.form_group {
+  display: flex;
+  flex-direction: row;
+}
+
+.btn_cadastrar {
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
+  background-color: #cef6a3;
+  border: solid 1px #a5f154;
+  border-radius: 5px;
+}
+
+.btn_cadastrar:hover {
+  border-color: #303132;
+}
+
+.position_btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn_pesquisar {
+  width: 10rem;
+  padding: 0.5rem;
+  background-color: #303132;
+  color: #ffffff;
+  border: solid 1px #000000;
+  border-radius: 5px;
+}
+
+.btn_pesquisar:hover {
+  transition: 0.3s;
+  background-color: #5a5b5c;
+}
+
+.table-container {
+    overflow-x: auto; /* Adiciona rolagem horizontal quando necessário */
+  }
+  
+  .table {
+    width: 90%;
+    border-collapse: collapse; /* Remove espaços entre as células */
+    border: 1px solid #303132;
+  }
+  
+  .table th,
+  .table td {
+    padding: 8px; /* Adiciona espaçamento interno nas células */
+    text-align: center; /* Centraliza o texto */
+    border: 1px solid #303132;
+  }
+  
+  .table th {
+    background-color: #f2f2f2; /* Cor de fundo para o cabeçalho */
+  }
+  
+  .table tr {
+    background-color: #f2f2f2; /* Cor de fundo para o cabeçalho */
+  }
+  
+  .actions {
+    width: 10%;
+  }  
+
+  .actions>button>i:hover {
+    background-color: #cef6a3;
+  }
+  
+  /* Estilo para tornar a tabela responsiva */
+  @media screen and (max-width: 768px) {
+    .table th,
+    .table td {
+      white-space: nowrap; /* Evita que o texto quebre para a próxima linha */
+      overflow: hidden; /* Esconde o conteúdo que ultrapassa o limite */
+      text-overflow: ellipsis; /* Adiciona reticências para indicar que o texto foi cortado */
+    }
+  }

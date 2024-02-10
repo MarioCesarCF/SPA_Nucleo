@@ -1,4 +1,4 @@
-import styles from "../../styles/home.module.css";
+import styles from "@/styles/home.module.css";
 import { Raleway } from "next/font/google";
 import { useState, useEffect } from "react";
 import { CompanyDTO } from "@/dto/CompanyDTO";
@@ -35,7 +35,7 @@ export default function Homepage() {
             throw new Error('Failed to fetch data');
           }
           const data = await response.json();
-          
+
           setCompanies(data.results || []);
         } catch (error) {
           console.error('Error fetching data:', error);
@@ -136,31 +136,38 @@ export default function Homepage() {
         <main className={styles.main}>
           <div className={styles.login_form}>
 
-            <button className="btn btn-success mt-2 ml-2" id="btn_cadastrar" onClick={() => router.push(`/cadastrar`)}>Cadastrar novo cliente</button>
+          <button className={styles.btn_cadastrar} onClick={() => router.push(`/cadastrar`)}>Cadastrar novo cliente</button>
+            
 
-            <div className="container">
+
+            <div className="">
               <h1 className="d-flex justify-content-center mt-5 mb-5 display-5">PESQUISAR CLIENTES</h1>
               <form>
-                <div className="form-group col-md-4 offset-md-4">
-                  <label htmlFor="nomeFiltro">Nome:</label>
-                  <input type="text" id="nomeFiltro" className="form-control"></input>
+                <div className={styles.form_group}>
+                  <div className="form-group col-md-2 offset-md-2">
+                    <label htmlFor="nomeFiltro">Nome:</label>
+                    <input type="text" id="nomeFiltro" className="form-control"></input>
+                  </div>
+                  <div className="form-group col-md-2 offset-md-1">
+                    <label htmlFor="documentoFiltro">Documento:</label>
+                    <input type="text" id="documentoFiltro" className="form-control"></input>
+                  </div>
+                  <div className="form-group col-md-2 offset-md-1">
+                    <label htmlFor="cidadeFiltro">Cidade:</label>
+                    <input type="text" id="cidadeFiltro" className="form-control"></input>
+                  </div>
                 </div>
-                <div className="form-group col-md-4 offset-md-4">
-                  <label htmlFor="documentoFiltro">Documento:</label>
-                  <input type="text" id="documentoFiltro" className="form-control"></input>
-                </div>
-                <div className="form-group col-md-4 offset-md-4">
-                  <label htmlFor="cidadeFiltro">Cidade:</label>
-                  <input type="text" id="cidadeFiltro" className="form-control"></input>
-                </div>
+
                 <br></br>
-                <button className="btn btn-primary col-md-2 offset-md-5">Pesquisar</button>
+                <div className={styles.position_btn}>
+                <button className={styles.btn_pesquisar}>Pesquisar</button>
+            </div>
+                
               </form>
             </div>
             <br></br>
-
-            <div className="d-flex justify-content-center">
-              <table className="table w-75 table-bordered table-hover">
+            <div className="d-flex justify-content-center table-container">
+              <table className={styles.table}>
                 <thead>
                   <tr>
                     <th scope="col">Ações</th>
@@ -172,22 +179,24 @@ export default function Homepage() {
                     <th scope="col">Informações gerais</th>
                   </tr>
                 </thead>
-                {companies.map((company) => (
-                  <tr key={company.id}>
-                    <td className="d-flex justify-content-center">
-                      <button onClick={() => handleEdit(company)} className={styles.btn_icon}><i className="fa-solid fa-location-dot"></i></button>
-                      <button onClick={() => handleEdit(company)} className={styles.btn_icon}><i className="fa-solid fa-arrows-rotate"></i></button>
-                      <button onClick={() => handleDelete(company.id)} className={styles.btn_icon}><i className="fa-solid fa-trash"></i></button>
-                      <button onClick={() => handleViewDetails(company.id)} className={styles.btn_icon}><i className="fa-solid fa-eye"></i></button>
-                    </td>
-                    <td >{company.name}</td>
-                    <td>{company.document}</td>
-                    <td>{company.city}</td>
-                    <td>{company.coordinatesX}</td>
-                    <td>{company.coordinatesY}</td>
-                    <td>{company.informations}</td>
-                  </tr>
-                ))}
+                <tbody>
+                  {companies.map((company) => (
+                    <tr key={company.id}>
+                      <td className={styles.actions}>
+                        <button onClick={() => handleEdit(company)} className={styles.btn_icon}><i className="fa-solid fa-location-dot" title="Visite o ponto no Google Maps."></i></button>
+                        <button onClick={() => handleEdit(company)} className={styles.btn_icon}><i className="fa-solid fa-arrows-rotate" title="Atualize os dados desta empresa."></i></button>
+                        <button onClick={() => handleDelete(company.id)} className={styles.btn_icon}><i className="fa-solid fa-trash" title="Exclua está empresa."></i></button>
+                        <button onClick={() => handleViewDetails(company.id)} className={styles.btn_icon}><i className="fa-solid fa-eye" title="Confira as informações da empresa."></i></button>
+                      </td>
+                      <td className={styles.actions}>{company.name}</td>
+                      <td className={styles.actions}>{company.document}</td>
+                      <td className={styles.actions}>{company.city}</td>
+                      <td className={styles.actions}>{company.coordinatesX}</td>
+                      <td className={styles.actions}>{company.coordinatesY}</td>
+                      <td className="">{company.informations}</td>
+                    </tr>
+                  ))}
+                </tbody>
               </table>
             </div>
           </div>

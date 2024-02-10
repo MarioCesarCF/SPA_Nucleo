@@ -1,10 +1,10 @@
 .footer {
   width: 100%;
-  display: flex;
-  align-items: center;
   background-color: #303132;  
-  position: absolute;
-  bottom: 0;
+  color: #ffffff;
+  font-size: 16px;
+  padding: 0.5rem;
+  margin-top: auto;
 }
 
 .test_footer {
@@ -12,4 +12,15 @@
   color: #ffffff;
   font-size: 16px;
   padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.test_footer>a {
+  padding: 0 5px;
+}
+
+.test_footer>a:hover {
+  color: #e6fa75;
 }
