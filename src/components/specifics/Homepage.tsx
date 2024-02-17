@@ -13,13 +13,8 @@ export default function Homepage() {
   const [companies, setCompanies] = useState<CompanyDTO[]>([]);
 
   useEffect(() => {
-    // Aqui você pode verificar se o token JWT está presente nos cookies
-    // Se não estiver, redirecione para a página de login
+    const token = Cookies.get('nucleo-token');
 
-  }, []);
-
-  useEffect(() => {
-    const token = Cookies.get('token');
     if (!token) {
       router.push('/login');
     } else {
@@ -45,16 +40,22 @@ export default function Homepage() {
     }
   }, []);
 
-  const handleEdit = (company: CompanyDTO) => {
+  const handleEdit = (companyId: any) => {
     // Redireciona o usuário para a página de edição da empresa com base no ID da empresa
-    router.push(`/edit-company/${company}`);
+    router.push(`/company-edit/${companyId}`);
   };
 
   const handleDelete = (companyId: any) => {
-    fetch(`https://api-coordinates.onrender.com/company?id=${companyId}`, {
+    const token = Cookies.get('nucleo-token');
+    fetch(`https://api-coordinates.onrender.com/company/${companyId}`, {
       method: "DELETE",
-      headers: { "Content-Type": "application/json" }
+      headers: { 
+        "Content-Type": "application/json", 
+        Authorization: `Bearer ${token}` 
+      }            
     })
+    //Colocar reload da página
+    router.push("/");
   };
 
   const handleViewDetails = (companyId: any) => {
@@ -62,74 +63,7 @@ export default function Homepage() {
     // Ainda não implementado
     router.push(`/company-details/${companyId}`);
   };
-
-  /*
-  useEffect(() => {
-    // Aqui você pode verificar se o token JWT está presente nos cookies
-    // Se não estiver, redirecione para a página de login
-    const token = Cookies.get('token');
-    if (!token) {
-      router.push('/login');
-    }
-  }, []);
-
-  const [itens, setItens] = useState(
-    [
-      
-      {
-        id: "123",
-        name: "Cliente A",
-        document: "11.222.333/0000-99",
-        city: "Ecops",
-        coordenadaX: -18.2222,
-        coordenadaY: -40.5555,
-        informacoes: "Número de contato do responsável (27)99999-9999"
-      },
-
-      {
-        id: "456",
-        name: "Cliente B",
-        document: "11.222.333/0000-99",
-        city: "Ecops",
-        coordenadaX: -18.2222,
-        coordenadaY: -40.5555,
-        informacoes: "Número de contato do responsável (27)99999-9999"
-      },
-      
-    ]
-  );
-
-  function getClient() {
-    fetch('https://api-coordinates.onrender.com/client', { method: "GET" })
-      .then(response => response.json())
-      .then(data => setItens(data))
-  }
-
-  function updateClient(item: ClientDto) {
-    fetch(`https://api-coordinates.onrender.com/client?id=${item.id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(item)
-    })
-      .then(response => response.json())
-      .then(() => getClient())
-  }
-
-  function deleteClient(item: ClientDto) {
-    fetch(`https://api-coordinates.onrender.com/client?id=${item.id}`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(item)
-    })
-      .then(response => response.json())
-      .then(() => getClient())
-  }
-
-  useEffect(() => {
-    getClient()
-  }, [])
-
-  */
+  
   return (
     <div className={styles.pageContainer}>
       <div className={raleway.className}>
@@ -137,9 +71,6 @@ export default function Homepage() {
           <div className={styles.login_form}>
 
           <button className={styles.btn_cadastrar} onClick={() => router.push(`/cadastrar`)}>Cadastrar novo cliente</button>
-            
-
-
             <div className="">
               <h1 className="d-flex justify-content-center mt-5 mb-5 display-5">PESQUISAR CLIENTES</h1>
               <form>
@@ -157,12 +88,10 @@ export default function Homepage() {
                     <input type="text" id="cidadeFiltro" className="form-control"></input>
                   </div>
                 </div>
-
                 <br></br>
                 <div className={styles.position_btn}>
                 <button className={styles.btn_pesquisar}>Pesquisar</button>
-            </div>
-                
+            </div>                
               </form>
             </div>
             <br></br>
@@ -183,8 +112,8 @@ export default function Homepage() {
                   {companies.map((company) => (
                     <tr key={company.id}>
                       <td className={styles.actions}>
-                        <button onClick={() => handleEdit(company)} className={styles.btn_icon}><i className="fa-solid fa-location-dot" title="Visite o ponto no Google Maps."></i></button>
-                        <button onClick={() => handleEdit(company)} className={styles.btn_icon}><i className="fa-solid fa-arrows-rotate" title="Atualize os dados desta empresa."></i></button>
+                        <button onClick={() => handleEdit(company.id)} className={styles.btn_icon}><i className="fa-solid fa-location-dot" title="Visite o ponto no Google Maps."></i></button>
+                        <button onClick={() => handleEdit(company.id)} className={styles.btn_icon}><i className="fa-solid fa-arrows-rotate" title="Atualize os dados desta empresa."></i></button>
                         <button onClick={() => handleDelete(company.id)} className={styles.btn_icon}><i className="fa-solid fa-trash" title="Exclua está empresa."></i></button>
                         <button onClick={() => handleViewDetails(company.id)} className={styles.btn_icon}><i className="fa-solid fa-eye" title="Confira as informações da empresa."></i></button>
                       </td>

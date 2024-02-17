@@ -1,7 +1,6 @@
 import style from "../../styles/cadastrar.module.css";
 import { Raleway } from "next/font/google";
 import { useRouter } from "next/router";
-import Cookies from 'js-cookie';
 
 const raleway = Raleway({ subsets: ["latin"] });
 
@@ -11,7 +10,7 @@ export default function CreateCompany() {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
   
-    const token = Cookies.get('token');
+    const token = localStorage.getItem('token');
     // Obter os valores dos inputs
     const name = document.getElementById('inputName').value.trim();
     const doc = document.getElementById('inputDoc').value.trim();
@@ -19,6 +18,7 @@ export default function CreateCompany() {
     const coordX = document.getElementById('inputCoordX').value.trim();
     const coordY = document.getElementById('inputCoordY').value.trim();
     const infos = document.getElementById('inputInfos').value.trim();
+    const numberProcesso = document.getElementById('inputNumberPros').value.trim();
   
     // Verificar se os campos obrigatórios estão preenchidos
     if (!name || !doc || !city || !coordX || !coordY) {
@@ -35,7 +35,7 @@ export default function CreateCompany() {
       coordinatesX: parseFloat(coordX),
       coordinatesY: parseFloat(coordY),
       informations: infos,
-      number_processo: "123",
+      number_processo: numberProcesso,
       client: "65c6dc8ef5316e4df92e4e94"
     };
   
@@ -58,6 +58,7 @@ export default function CreateCompany() {
         document.getElementById('inputCoordX').value = '';
         document.getElementById('inputCoordY').value = '';
         document.getElementById('inputInfos').value = '';
+        document.getElementById('inputNumberPros').value = '';
   
         alert('Dados salvos com sucesso!');
       } else {
@@ -83,25 +84,25 @@ export default function CreateCompany() {
             <form className={style.form} onSubmit={handleSubmit}>
               <div className={style.formGroup}>
                 <label htmlFor="inputName">NOME *</label>
-                <input type="text" className={style.input} id="inputName" />
+                <input type="text" className={style.inputName} id="inputName" />
               </div>
 
               <div className={style.formGroup}>
                 <label htmlFor="inputDoc">DOCUMENTO *</label>
-                <input type="text" className={style.input} id="inputDoc" />
-              </div>
-              <div className={style.formGroup}>
+                <input type="text" className={style.inputDoc} id="inputDoc" />
                 <label htmlFor="inputCity">CIDADE *</label>
-                <input type="text" className={style.input} id="inputCity" />
+                <input type="text" className={style.inputCity} id="inputCity" />
+                <label htmlFor="inputNumberPros">NÚMERO PROCESSO *</label>
+                <input type="text" className={style.inputNumber} id="inputNumberPros" />
               </div>
+
               <div className={style.formGroup}>
                 <label htmlFor="inputCoordX">COORDENADA X *</label>
-                <input type="number" className={style.input} id="inputCoordX" step="any" />
-              </div>
-              <div className={style.formGroup}>
+                <input type="number" className={style.inputCoordX} id="inputCoordX" step="any" />
                 <label htmlFor="inputCoordY">COORDENADA Y *</label>
-                <input type="number" className={style.input} id="inputCoordY" step="any" />
+                <input type="number" className={style.inputCoordY} id="inputCoordY" step="any" />
               </div>
+              
               <div className={style.formGroup}>
                 <label htmlFor="inputInfos">INFORMAÇÕES GERAIS</label>
                 <textarea className={style.textarea} id="inputInfos" />
