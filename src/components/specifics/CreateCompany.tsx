@@ -1,6 +1,7 @@
 import style from "../../styles/cadastrar.module.css";
 import { Raleway } from "next/font/google";
 import { useRouter } from "next/router";
+import { parseCookies } from "nookies";
 
 const raleway = Raleway({ subsets: ["latin"] });
 
@@ -10,7 +11,7 @@ export default function CreateCompany() {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
   
-    const token = localStorage.getItem('token');
+    const {"nucleo-token": token} = parseCookies();
     // Obter os valores dos inputs
     const name = document.getElementById('inputName').value.trim();
     const doc = document.getElementById('inputDoc').value.trim();
@@ -39,7 +40,6 @@ export default function CreateCompany() {
       client: "65c6dc8ef5316e4df92e4e94"
     };
   
-    console.log(formData);
     // Enviar os dados para o backend
     try {
       const response = await fetch('https://api-coordinates.onrender.com/company', {
@@ -52,23 +52,28 @@ export default function CreateCompany() {
       });
   
       if (response.ok) {
-        document.getElementById('inputName').value = '';
-        document.getElementById('inputDoc').value = '';
-        document.getElementById('inputCity').value = '';
-        document.getElementById('inputCoordX').value = '';
-        document.getElementById('inputCoordY').value = '';
-        document.getElementById('inputInfos').value = '';
-        document.getElementById('inputNumberPros').value = '';
+        limparForm()
   
         alert('Dados salvos com sucesso!');
       } else {
-        alert('Erro ao salvar os dados. Por favor, tente novamente.');
+        const errorData = await response.json();    
+        alert(`Erro ao salvar os dados: ${errorData.message}`);
       }
     } catch (error) {
-      console.error('Erro ao enviar os dados:', error);
+      console.error(error);
       alert('Erro ao salvar os dados. Por favor, tente novamente.');
     }
   };
+
+  function limparForm() {
+    document.getElementById('inputName').value = '';
+    document.getElementById('inputDoc').value = '';
+    document.getElementById('inputCity').value = '';
+    document.getElementById('inputCoordX').value = '';
+    document.getElementById('inputCoordY').value = '';
+    document.getElementById('inputInfos').value = '';
+    document.getElementById('inputNumberPros').value = '';
+  }
 
   return (
     <div>

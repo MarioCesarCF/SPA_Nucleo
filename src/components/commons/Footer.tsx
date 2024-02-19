@@ -5,11 +5,15 @@ const raleway = Raleway({ subsets: ["latin"] });
 
 const Footer = () => {
   return (
-    <footer className={styles.footer}>
+    <div>
+      <br></br>
+      <footer className={styles.footer}>
       <p className={styles.test_footer}>
         Propriedade de  <a href="https://www.nucleoambiente.com.br/" target="_blank"> @Núcleo Ambiental</a> | Desenvolvido por  <a href="https://github.com/MarioCesarCF" target="_blank"> @MárioCesarDev</a>
       </p>
     </footer>
+    </div>
+    
   );
 }
 

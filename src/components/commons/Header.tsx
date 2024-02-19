@@ -4,36 +4,25 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import styles from "../../styles/header.module.css";
 import { Raleway } from "next/font/google";
+import { destroyCookie } from 'nookies';
+import { useContext } from 'react';
+import { UserContext } from './UserContext';
 
 const raleway = Raleway({ subsets: ["latin"] });
 
 export default function Header() {
-  //const { user } = useUser();
   const router = useRouter();
-
-  //console.log(user);
   
-  const handleLogout = () => {
-    if (typeof window !== 'undefined') {
-      localStorage.removeItem("token");
-      localStorage.removeItem("user_name");
-      localStorage.removeItem("user_id");
-      console.log(localStorage.getItem("token"));
-    }
-    
+  const handleLogout = () => {    
+    destroyCookie(null, "nucleo-token");
+    destroyCookie(null, "user");
     router.push('/login');
   };
 
   const getUserInfoFromLocalStorage = () => {
-    // Verifica se o localStorage está disponível (apenas no lado do cliente)
-    if (typeof window !== 'undefined') {
-      const name = localStorage.getItem('user_name');
-      const id = localStorage.getItem('user_id');
-      
-      return { name, id };
-    } else {
-      return { name: null, id: null }; // Retorna valores padrão se o localStorage não estiver disponível
-    }
+    const { user } = useContext(UserContext);
+
+    return user;
   };
 
   const userInfo = getUserInfoFromLocalStorage();
@@ -62,7 +51,7 @@ export default function Header() {
                 width={35}
                 height={35}
               />
-              <div>Olá {userInfo.name}</div>
+              <div>Olá {userInfo?.name}</div>
             </div>
             <nav className={styles.navigation}>
               <Link href="/acesso-adm">Acesso Adm</Link>

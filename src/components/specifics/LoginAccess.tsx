@@ -11,9 +11,6 @@ const raleway = Raleway({ subsets: ["latin"] });
 
 export default function LoginAccess() {
   const {register, handleSubmit} = useForm();
-  //const router = useRouter();
-  //const [email, setEmail] = useState('');
-  //const [password, setPassword] = useState('');
   const {signIn} = useContext(UserContext);
 
   async function handleSignIn(data: any) {

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { setCookie } from 'nookies';
+import { setCookie, parseCookies } from 'nookies';
 import Router from 'next/router';
 
 type User = {
@@ -24,7 +24,38 @@ export function UserProvider({ children }: any) {
   const [user, setUser] = useState<User | null>(null);
 
   const isAuthenticated = !!user;  
-  
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const { email } = parseCookies();
+
+      if (email) {
+        try {
+          const response = await fetch(`https://api-coordinates.onrender.com/user/email/${email}`, {
+            method: 'GET'
+          });
+
+          if (!response.ok) {
+            throw new Error('Erro ao buscar os dados do usuário');
+          }
+
+          const userData: User = await response.json();
+
+          setCookie(undefined, 'user', userData.name, {
+            maxAge: 60 * 60 * 24 //24horas
+          })
+
+          setUser(userData);
+        } catch (error) {
+          console.error(error);
+          alert("Usuário não encontrado");
+        }
+      }
+    };
+
+    fetchUser();
+  }, []);
+
   async function signIn({email, password}: SignInData) {
     try {
     const response = await fetch('https://api-coordinates.onrender.com/auth', {
@@ -38,22 +69,30 @@ export function UserProvider({ children }: any) {
       const { token } = await response.json();
 
       if (response.ok) {
+        const response = await fetch(`https://api-coordinates.onrender.com/user/email/${email}`, {
+          method: 'GET'
+        });
+
+        if (!response.ok) {
+          throw new Error('Erro ao buscar os dados do usuário');
+        }
+
+        const userData: User = await response.json();
+
+        setCookie(undefined, 'user', userData.name, {
+          maxAge: 60 * 60 * 24 //24horas
+        })
+
+        setUser(userData);
+
         setCookie(undefined, 'nucleo-token', token, {
           maxAge: 60 * 60 * 24 //24horas
         })
 
-        const userResponse = await fetch(`https://api-coordinates.onrender.com/user/email/${email}`, {
-          method: 'GET'
-        });
-  
-        if (!userResponse.ok) {
-          throw new Error('Failed to fetch user data');
-        }
-  
-        const user = await userResponse.json();
-
-        setUser(user);
-
+        setCookie(undefined, 'email', email, {
+          maxAge: 60 * 60 * 24 //24horas
+        })
+        
         Router.push("/");
       } else {
         alert('E-mail ou senha inválidos. Login falhou.');
