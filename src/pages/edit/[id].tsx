@@ -1,4 +1,4 @@
-import ViewCompany from "@/components/specifics/ViewCompany";
+import EditCompany from "@/components/specifics/EditCompany";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -10,9 +10,9 @@ export default function View() {
   return (
     <>
       <Head>
-        <title>Empresa | Núcleo Ambiental</title>
+        <title>Atualização de dados | Núcleo Ambiental</title>
       </Head>
-      <ViewCompany companyId={id || ""} />     
+      <EditCompany companyId={id || ""} />     
       <Link href="/">Voltar para a Página Inicial.</Link>
     </>
   );

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { CompanyDTO } from "@/dto/CompanyDTO";
 import { useRouter } from 'next/router';
 import { parseCookies } from 'nookies';
+import Link from "next/link";
 
 export default function Homepage() {
   const router = useRouter();
@@ -56,13 +57,7 @@ export default function Homepage() {
     setNameFilter(newNameFilter);
     setDocumentFilter(newDocumentFilter);
     setCityFilter(newCityFilter);
-  };
-
-  const handleEdit = (companyId: any) => {
-    // Redireciona o usuário para a página de edição da empresa com base no ID da empresa
-    // Ainda não implementado
-    router.push(`/company-edit/${companyId}`);
-  };
+  };  
 
   const handleDelete = async (companyId: any) => {
     const { "nucleo-token": token } = parseCookies();
@@ -78,16 +73,22 @@ export default function Homepage() {
 
       window.location.reload();
     } catch (error) {
-      console.error('Erro ao excluir a empresa:', error);
-      alert("Erro ao excluir a empresa!");
+      alert(`Erro ao excluir a empresa: ${error}`);
     }
 
   };
 
-  const handleViewDetails = (companyId: any) => {
-    // Redireciona o usuário para a página de detalhes da empresa com base no ID da empresa
-    // Ainda não implementado
+  const handleViewDetails = (companyId: any ) => {
     router.push(`/view/${companyId}`);
+  };
+
+  const handleEdit = (companyId: any) => {
+    router.push(`/edit/${companyId}`);
+  };
+
+  const handleNavigation = (coordinatesX: number | undefined, coordinatesY: number | undefined) => {    
+    var urlMaps = `https://www.google.com.br/maps/place/${coordinatesX},${coordinatesY}`;
+    window.open(urlMaps, '_blank');
   };
 
   return (
@@ -139,7 +140,7 @@ export default function Homepage() {
                   {companies.map((company) => (
                     <tr key={company.id}>
                       <td className={styles.actions}>
-                        <button onClick={() => handleEdit(company.id)} className={styles.btn_icon}><i className="fa-solid fa-location-dot" title="Visite o ponto no Google Maps."></i></button>
+                        <button onClick={() => handleNavigation(company.coordinatesX, company.coordinatesY)} className={styles.btn_icon}><i className="fa-solid fa-location-dot" title="Visite o ponto no Google Maps."></i></button>
                         <button onClick={() => handleEdit(company.id)} className={styles.btn_icon}><i className="fa-solid fa-arrows-rotate" title="Atualize os dados desta empresa."></i></button>
                         <button onClick={() => handleDelete(company.id)} className={styles.btn_icon}><i className="fa-solid fa-trash" title="Exclua está empresa."></i></button>
                         <button onClick={() => handleViewDetails(company.id)} className={styles.btn_icon}><i className="fa-solid fa-eye" title="Confira as informações da empresa."></i></button>
