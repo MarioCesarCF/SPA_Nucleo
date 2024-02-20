@@ -1,31 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import styles from "../../styles/header.module.css";
 import { Raleway } from "next/font/google";
 import { destroyCookie } from 'nookies';
-import { useContext } from 'react';
 import { UserContext } from './UserContext';
 
 const raleway = Raleway({ subsets: ["latin"] });
 
 export default function Header() {
   const router = useRouter();
+  const { user } = useContext(UserContext); // Aqui você usa o useContext dentro do componente Header
   
   const handleLogout = () => {    
     destroyCookie(null, "nucleo-token");
     destroyCookie(null, "user");
     router.push('/login');
   };
-
-  const getUserInfoFromLocalStorage = () => {
-    const { user } = useContext(UserContext);
-
-    return user;
-  };
-
-  const userInfo = getUserInfoFromLocalStorage();
 
   const isLoginPage = router.pathname === '/login';
 
@@ -51,7 +43,7 @@ export default function Header() {
                 width={35}
                 height={35}
               />
-              <div>Olá {userInfo?.name}</div>
+              <div>Olá {user?.name}</div> {/* Aqui você acessa diretamente o nome do usuário */}
             </div>
             <nav className={styles.navigation}>
               <Link href="/acesso-adm">Acesso Adm</Link>

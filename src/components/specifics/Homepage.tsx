@@ -50,14 +50,18 @@ export default function Homepage() {
   const handleSearch = async (e: any) => {
     e.preventDefault();
 
-    const newNameFilter = document.getElementById('nomeFiltro').value;
-    const newDocumentFilter = document.getElementById('documentoFiltro').value;
-    const newCityFilter = document.getElementById('cidadeFiltro').value;
+    const nomeFiltroElement = document.getElementById('nomeFiltro') as HTMLInputElement | null;
+    const documentoFiltroElement = document.getElementById('documentoFiltro') as HTMLInputElement | null;
+    const cidadeFiltroElement = document.getElementById('cidadeFiltro') as HTMLInputElement | null;
+
+    const newNameFilter = nomeFiltroElement ? nomeFiltroElement.value : '';
+    const newDocumentFilter = documentoFiltroElement ? documentoFiltroElement.value : '';
+    const newCityFilter = cidadeFiltroElement ? cidadeFiltroElement.value : '';
 
     setNameFilter(newNameFilter);
     setDocumentFilter(newDocumentFilter);
     setCityFilter(newCityFilter);
-  };  
+  };
 
   const handleDelete = async (companyId: any) => {
     const { "nucleo-token": token } = parseCookies();
@@ -78,7 +82,7 @@ export default function Homepage() {
 
   };
 
-  const handleViewDetails = (companyId: any ) => {
+  const handleViewDetails = (companyId: any) => {
     router.push(`/view/${companyId}`);
   };
 
@@ -86,7 +90,7 @@ export default function Homepage() {
     router.push(`/edit/${companyId}`);
   };
 
-  const handleNavigation = (coordinatesX: number | undefined, coordinatesY: number | undefined) => {    
+  const handleNavigation = (coordinatesX: number | undefined, coordinatesY: number | undefined) => {
     var urlMaps = `https://www.google.com.br/maps/place/${coordinatesX},${coordinatesY}`;
     window.open(urlMaps, '_blank');
   };

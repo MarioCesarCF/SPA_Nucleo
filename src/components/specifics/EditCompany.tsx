@@ -34,13 +34,22 @@ export default function EditCompany({ companyId }: Props) {
   
     const {"nucleo-token": token} = parseCookies();
 
-    const name = document.getElementById('inputName').value.trim();
-    const doc = document.getElementById('inputDoc').value.trim();
-    const city = document.getElementById('inputCity').value.trim();
-    const coordX = document.getElementById('inputCoordX').value.trim();
-    const coordY = document.getElementById('inputCoordY').value.trim();
-    const infos = document.getElementById('inputInfos').value.trim();
-    const numberProcesso = document.getElementById('inputNumberPros').value.trim();
+    const nameElement = document.getElementById('inputName') as HTMLInputElement | null;
+    const docElement = document.getElementById('inputDoc') as HTMLInputElement | null;
+    const cityElement = document.getElementById('inputCity') as HTMLInputElement | null;
+    const coordXElement = document.getElementById('inputCoordX') as HTMLInputElement | null;
+    const coordYElement = document.getElementById('inputCoordY') as HTMLInputElement | null;
+    const infosElement = document.getElementById('inputInfos') as HTMLInputElement | null;
+    const numberProcessoElement = document.getElementById('inputNumberPros') as HTMLInputElement | null;
+
+    // Verificar se todos os elementos existem antes de acessar suas propriedades
+    const name = nameElement?.value?.trim() ?? '';
+    const doc = docElement?.value?.trim() ?? '';
+    const city = cityElement?.value?.trim() ?? '';
+    const coordX = coordXElement?.value?.trim() ?? '';
+    const coordY = coordYElement?.value?.trim() ?? '';
+    const infos = infosElement?.value?.trim() ?? '';
+    const numberProcesso = numberProcessoElement?.value?.trim() ?? '';
   
     if (!name || !doc || !city || !coordX || !coordY) {
       alert('Por favor, preencha todos os campos obrigatórios.');

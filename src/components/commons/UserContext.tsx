@@ -14,7 +14,7 @@ type SignInData = {
 
 type AuthContextType = {
   isAuthenticated: boolean;
-  user: User;
+  user: User | null; // Corrigido para permitir valor nulo
   signIn: (data: SignInData) => Promise<void>;
 }
 
@@ -41,10 +41,6 @@ export function UserProvider({ children }: any) {
 
           const userData: User = await response.json();
 
-          setCookie(undefined, 'user', userData.name, {
-            maxAge: 60 * 60 * 24 //24horas
-          })
-
           setUser(userData);
         } catch (error) {
           console.error(error);
@@ -58,7 +54,7 @@ export function UserProvider({ children }: any) {
 
   async function signIn({email, password}: SignInData) {
     try {
-    const response = await fetch('https://api-coordinates.onrender.com/auth', {
+      const response = await fetch('https://api-coordinates.onrender.com/auth', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -66,39 +62,39 @@ export function UserProvider({ children }: any) {
         body: JSON.stringify({ email, password }),
       });
 
+      if (!response.ok) {
+        throw new Error('E-mail ou senha inválidos. Login falhou.');
+      }
+
       const { token } = await response.json();
 
-      if (response.ok) {
-        const response = await fetch(`https://api-coordinates.onrender.com/user/email/${email}`, {
-          method: 'GET'
-        });
+      const userDataResponse = await fetch(`https://api-coordinates.onrender.com/user/email/${email}`, {
+        method: 'GET'
+      });
 
-        if (!response.ok) {
-          throw new Error('Erro ao buscar os dados do usuário');
-        }
-
-        const userData: User = await response.json();
-
-        setCookie(undefined, 'user', userData.name, {
-          maxAge: 60 * 60 * 24 //24horas
-        })
-
-        setUser(userData);
-
-        setCookie(undefined, 'nucleo-token', token, {
-          maxAge: 60 * 60 * 24 //24horas
-        })
-
-        setCookie(undefined, 'email', email, {
-          maxAge: 60 * 60 * 24 //24horas
-        })
-        
-        Router.push("/");
-      } else {
-        alert('E-mail ou senha inválidos. Login falhou.');
+      if (!userDataResponse.ok) {
+        throw new Error('Erro ao buscar os dados do usuário');
       }
-    } catch (error) {
-      alert(`Error: ${error}`);
+
+      const userData: User = await userDataResponse.json();
+
+      setUser(userData);
+
+      setCookie(undefined, 'user', JSON.stringify(userData), {
+        maxAge: 60 * 60 * 24 // 24 horas
+      });
+
+      setCookie(undefined, 'nucleo-token', token, {
+        maxAge: 60 * 60 * 24 // 24 horas
+      });
+
+      setCookie(undefined, 'email', email, {
+        maxAge: 60 * 60 * 24 // 24 horas
+      });
+
+      Router.push("/");
+    } catch (error: any) { // Aqui estamos tipando 'error' explicitamente como 'any'
+      alert(`Error: ${error.message}`);
     }
   }
 
