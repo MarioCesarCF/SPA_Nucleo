@@ -7,8 +7,8 @@ export default function AcessoAdm() {
       <Head>
         <title>Acesso Adm | Núcleo Ambiental</title>
       </Head>
+      <Link href="/"><i className="fa-solid fa-house" title="Botão para voltar à página principal."></i></Link>
       <h1>Acesso Adm</h1>
-      <Link href="/">Ir para a Página Inicial.</Link>
     </>
   );
 }

@@ -1,9 +1,6 @@
 import style from "../../styles/cadastrar.module.css";
-import { Raleway } from "next/font/google";
 import { useRouter } from "next/router";
 import { parseCookies } from "nookies";
-
-const raleway = Raleway({ subsets: ["latin"] });
 
 export default function CreateCompany() {
   const router = useRouter();
@@ -12,7 +9,7 @@ export default function CreateCompany() {
     e.preventDefault();
 
     const { "nucleo-token": token } = parseCookies();
-    // Obter os valores dos inputs
+    
     const nameElement = document.getElementById('inputName') as HTMLInputElement | null;
     const docElement = document.getElementById('inputDoc') as HTMLInputElement | null;
     const cityElement = document.getElementById('inputCity') as HTMLInputElement | null;
@@ -20,8 +17,7 @@ export default function CreateCompany() {
     const coordYElement = document.getElementById('inputCoordY') as HTMLInputElement | null;
     const infosElement = document.getElementById('inputInfos') as HTMLInputElement | null;
     const numberProcessoElement = document.getElementById('inputNumberPros') as HTMLInputElement | null;
-
-    // Verificar se todos os elementos existem antes de acessar suas propriedades
+    
     const name = nameElement?.value?.trim() ?? '';
     const doc = docElement?.value?.trim() ?? '';
     const city = cityElement?.value?.trim() ?? '';
@@ -29,15 +25,13 @@ export default function CreateCompany() {
     const coordY = coordYElement?.value?.trim() ?? '';
     const infos = infosElement?.value?.trim() ?? '';
     const numberProcesso = numberProcessoElement?.value?.trim() ?? '';
-
-    // Verificar se os campos obrigatórios estão preenchidos
-    if (!name || !doc || !city || !coordX || !coordY) {
+    
+    if (!name || !doc || !city || !coordX || !coordY || !numberProcesso) {
       alert('Por favor, preencha todos os campos obrigatórios.');
       return;
     }
 
-    // LEMBRAR DE INPUT PARA NÚMERO DE PROCESSO E SELECT PARA O CLIENTE
-    // Criar o objeto com os dados do formulário
+    // LEMBRAR DE SELECT PARA O CLIENTE
     const formData = {
       name: name,
       document: doc,
@@ -48,8 +42,7 @@ export default function CreateCompany() {
       number_processo: numberProcesso,
       client: "65c6dc8ef5316e4df92e4e94"
     };
-
-    // Enviar os dados para o backend
+    
     try {
       const response = await fetch('https://api-coordinates.onrender.com/company', {
         method: 'POST',
@@ -59,7 +52,7 @@ export default function CreateCompany() {
         },
         body: JSON.stringify(formData)
       });
-
+      
       if (response.ok) {
         limparForm()
 
@@ -68,8 +61,7 @@ export default function CreateCompany() {
         const errorData = await response.json();
         alert(`Erro ao salvar os dados: ${errorData.message}`);
       }
-    } catch (error) {
-      console.error(error);
+    } catch (error) {      
       alert('Erro ao salvar os dados. Por favor, tente novamente.');
     }
   };
@@ -82,8 +74,7 @@ export default function CreateCompany() {
     const inputCoordY = document.getElementById('inputCoordY') as HTMLInputElement | null;
     const inputInfos = document.getElementById('inputInfos') as HTMLInputElement | null;
     const inputNumberPros = document.getElementById('inputNumberPros') as HTMLInputElement | null;
-
-    // Verificar se todos os elementos existem antes de acessar suas propriedades
+    
     if (inputName) inputName.value = '';
     if (inputDoc) inputDoc.value = '';
     if (inputCity) inputCity.value = '';

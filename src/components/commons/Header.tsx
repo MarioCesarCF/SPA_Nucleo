@@ -11,7 +11,7 @@ const raleway = Raleway({ subsets: ["latin"] });
 
 export default function Header() {
   const router = useRouter();
-  const { user } = useContext(UserContext); // Aqui você usa o useContext dentro do componente Header
+  const { user } = useContext(UserContext);
   
   const handleLogout = () => {    
     destroyCookie(null, "nucleo-token");

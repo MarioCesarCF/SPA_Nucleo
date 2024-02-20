@@ -21,6 +21,8 @@ type AuthContextType = {
 export const UserContext = createContext({} as AuthContextType);
 
 export function UserProvider({ children }: any) {
+  const apiURL = "https://api-coordinates.onrender.com";
+
   const [user, setUser] = useState<User | null>(null);
 
   const isAuthenticated = !!user;  
@@ -31,7 +33,7 @@ export function UserProvider({ children }: any) {
 
       if (email) {
         try {
-          const response = await fetch(`https://api-coordinates.onrender.com/user/email/${email}`, {
+          const response = await fetch(`${apiURL}/user/email/${email}`, {
             method: 'GET'
           });
 
@@ -43,8 +45,7 @@ export function UserProvider({ children }: any) {
 
           setUser(userData);
         } catch (error) {
-          console.error(error);
-          alert("Usuário não encontrado");
+          alert(`Erro ao buscar usuário: ${error}`);
         }
       }
     };
@@ -54,7 +55,7 @@ export function UserProvider({ children }: any) {
 
   async function signIn({email, password}: SignInData) {
     try {
-      const response = await fetch('https://api-coordinates.onrender.com/auth', {
+      const response = await fetch(`${apiURL}/auth`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -68,7 +69,7 @@ export function UserProvider({ children }: any) {
 
       const { token } = await response.json();
 
-      const userDataResponse = await fetch(`https://api-coordinates.onrender.com/user/email/${email}`, {
+      const userDataResponse = await fetch(`${apiURL}/user/email/${email}`, {
         method: 'GET'
       });
 

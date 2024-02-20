@@ -12,8 +12,8 @@ export default function View() {
       <Head>
         <title>Atualização de dados | Núcleo Ambiental</title>
       </Head>
+      <Link href="/"><i className="fa-solid fa-house" title="Botão para voltar à página principal."></i></Link>
       <EditCompany companyId={id || ""} />     
-      <Link href="/">Voltar para a Página Inicial.</Link>
     </>
   );
 }

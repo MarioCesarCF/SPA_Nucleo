@@ -21,6 +21,8 @@ type Company = {
 
 export default function EditCompany({ companyId }: Props) {
   const router = useRouter();
+  const {"nucleo-token": token} = parseCookies();
+
   const [companyData, setCompanyData] = useState<Company | null>(null);
 
   useEffect(() => {
@@ -31,8 +33,6 @@ export default function EditCompany({ companyId }: Props) {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-  
-    const {"nucleo-token": token} = parseCookies();
 
     const nameElement = document.getElementById('inputName') as HTMLInputElement | null;
     const docElement = document.getElementById('inputDoc') as HTMLInputElement | null;
@@ -41,8 +41,7 @@ export default function EditCompany({ companyId }: Props) {
     const coordYElement = document.getElementById('inputCoordY') as HTMLInputElement | null;
     const infosElement = document.getElementById('inputInfos') as HTMLInputElement | null;
     const numberProcessoElement = document.getElementById('inputNumberPros') as HTMLInputElement | null;
-
-    // Verificar se todos os elementos existem antes de acessar suas propriedades
+    
     const name = nameElement?.value?.trim() ?? '';
     const doc = docElement?.value?.trim() ?? '';
     const city = cityElement?.value?.trim() ?? '';
@@ -91,8 +90,6 @@ export default function EditCompany({ companyId }: Props) {
   };
 
   async function getCompany(companyId: string) {
-    const { "nucleo-token": token } = parseCookies();
-
     try {
       const response = await fetch(`https://api-coordinates.onrender.com/company/${companyId}`, {
         method: "GET",
@@ -110,7 +107,7 @@ export default function EditCompany({ companyId }: Props) {
         router.push("/");
       }
     } catch (error) {
-      console.error("Erro ao obter dados da empresa:", error);
+      alert("Erro ao obter dados da empresa: " + error);
     }
   };
 

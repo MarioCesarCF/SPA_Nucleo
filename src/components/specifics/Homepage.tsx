@@ -3,10 +3,10 @@ import { useState, useEffect } from "react";
 import { CompanyDTO } from "@/dto/CompanyDTO";
 import { useRouter } from 'next/router';
 import { parseCookies } from 'nookies';
-import Link from "next/link";
 
 export default function Homepage() {
   const router = useRouter();
+  const { "nucleo-token": token } = parseCookies();
 
   const [nameFilter, setNameFilter] = useState('');
   const [documentFilter, setDocumentFilter] = useState('');
@@ -14,9 +14,7 @@ export default function Homepage() {
 
   const [companies, setCompanies] = useState<CompanyDTO[]>([]);
 
-  useEffect(() => {
-    const { "nucleo-token": token } = parseCookies();
-
+  useEffect(() => {   
     if (!token) {
       router.push('/login');
     } else {
@@ -64,8 +62,6 @@ export default function Homepage() {
   };
 
   const handleDelete = async (companyId: any) => {
-    const { "nucleo-token": token } = parseCookies();
-
     try {
       await fetch(`https://api-coordinates.onrender.com/company/${companyId}`, {
         method: "DELETE",
