@@ -8,7 +8,6 @@ export default function Cadastro() {
       <Head>
         <title>Cadastro | Núcleo Ambiental</title>
       </Head>
-      <Link href="/"><i className="fa-solid fa-house" title="Botão para voltar à página principal."></i></Link>
       <CreateCompany />     
     </>
   );

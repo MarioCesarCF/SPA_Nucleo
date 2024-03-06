@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { parseCookies } from 'nookies';
-import style from "../../styles/cadastrar.module.css";
+import style from "@/styles/cadastrar.module.css";
 
 type Props = {
   companyId: string | string[];
@@ -78,7 +78,7 @@ export default function EditCompany({ companyId }: Props) {
   
       if (response.ok) {  
         alert('Dados salvos com sucesso!');
-        router.push("/");
+        router.push("/home");
       } else {
         const errorData = await response.json();    
         alert(`Erro ao salvar os dados: ${errorData.message}`);
@@ -104,7 +104,7 @@ export default function EditCompany({ companyId }: Props) {
         setCompanyData(companyData);
       } else {
         alert("Erro ao carregar as informações. Por favor, tente novamente ou entre em contato com o setor de suporte.");
-        router.push("/");
+        router.push("/home");
       }
     } catch (error) {
       alert("Erro ao obter dados da empresa: " + error);
@@ -117,6 +117,7 @@ export default function EditCompany({ companyId }: Props) {
 
   return (
     <div>
+      <button className={style.btn_return_home} onClick={() => router.push(`/home`)}><i className="fa-solid fa-house" title="Botão para voltar à página principal."></i></button>
       <div className={style.titleCadastro}>
       <h1>Formulário para atualização de dados da empresa</h1>
       </div>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { parseCookies } from 'nookies';
+import style from "@/styles/btn-return.module.css"
 
 type Props = {
   companyId: string | string[];
@@ -45,7 +46,7 @@ const ViewCompany = ({ companyId }: Props) => {
         setCompanyData(companyData);
       } else {
         alert("Erro ao carregar as informações. Por favor, tente novamente ou entre em contato com o setor de suporte.");
-        router.push("/");
+        router.push("/home");
       }
     } catch (error) {
       console.error("Erro ao obter dados da empresa:", error);
@@ -58,6 +59,7 @@ const ViewCompany = ({ companyId }: Props) => {
 
   return (
     <div>
+      <button className={style.btn_return_home} onClick={() => router.push(`/home`)}><i className="fa-solid fa-house" title="Botão para voltar à página principal."></i></button>
       <div>
         <h1>{companyData.name}</h1>
       </div>

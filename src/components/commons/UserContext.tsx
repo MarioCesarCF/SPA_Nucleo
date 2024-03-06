@@ -93,7 +93,7 @@ export function UserProvider({ children }: any) {
         maxAge: 60 * 60 * 24 // 24 horas
       });
 
-      Router.push("/");
+      Router.push("/home");
     } catch (error: any) { // Aqui estamos tipando 'error' explicitamente como 'any'
       alert(`Error: ${error.message}`);
     }

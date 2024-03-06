@@ -1,6 +1,7 @@
 import style from "../../styles/cadastrar.module.css";
 import { useRouter } from "next/router";
 import { parseCookies } from "nookies";
+import Router from 'next/router';
 
 export default function CreateCompany() {
   const router = useRouter();
@@ -56,6 +57,7 @@ export default function CreateCompany() {
       if (response.ok) {
         limparForm()
 
+        Router.push("/home");
         alert('Dados salvos com sucesso!');
       } else {
         const errorData = await response.json();
@@ -86,6 +88,7 @@ export default function CreateCompany() {
 
   return (
     <div>
+      <button className={style.btn_return_home} onClick={() => router.push(`/home`)}><i className="fa-solid fa-house" title="Botão para voltar à página principal."></i></button>
       <div className={style.titleCadastro}>
         <h1>Formulário para cadastro de empresa</h1>
       </div>

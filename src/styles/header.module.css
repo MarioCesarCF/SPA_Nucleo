@@ -27,3 +27,7 @@
   gap: 1rem;
   padding-right: 1rem;
 }
+
+.colorText:hover {
+  color: #c1db00;
+}

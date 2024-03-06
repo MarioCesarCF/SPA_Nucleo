@@ -1,0 +1,18 @@
+.btn_return_home {
+  padding: 0.3rem;
+margin-top: 0.5rem;
+margin-left: 0.5rem;
+background-color: #cef6a3;
+border: solid 1px #a5f154;
+border-radius: 5px;
+width: 3rem;
+}
+
+.btn_return_home:hover {
+  border-color: #303132;
+  background-color: #c1db00;
+}
+
+.btn_return_home>i {
+  font-size: 20px;
+}

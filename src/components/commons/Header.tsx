@@ -3,11 +3,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import styles from "../../styles/header.module.css";
-import { Raleway } from "next/font/google";
+import { Poppins } from "next/font/google";
 import { destroyCookie } from 'nookies';
 import { UserContext } from './UserContext';
 
-const raleway = Raleway({ subsets: ["latin"] });
+const raleway = Poppins({ subsets: ['latin'], weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'] });
 
 export default function Header() {
   const router = useRouter();
@@ -16,15 +16,15 @@ export default function Header() {
   const handleLogout = () => {    
     destroyCookie(null, "nucleo-token");
     destroyCookie(null, "user");
-    router.push('/login');
+    router.push('/');
   };
 
-  const isLoginPage = router.pathname === '/login';
+  const isLoginPage = router.pathname === '/';
 
   return (
     <div className={raleway.className}>
       <header className={styles.header}>
-        <Link href="/">
+        <Link href="/home">
           <Image
             src="/images/logo_branca.png"
             alt="Ícone da Núcleo Ambiental"
@@ -46,9 +46,9 @@ export default function Header() {
               <div>Olá {user?.name}</div> {/* Aqui você acessa diretamente o nome do usuário */}
             </div>
             <nav className={styles.navigation}>
-              <Link href="/acesso-adm">Acesso Adm</Link>
-              <Link href="/suporte">Suporte</Link>
-              <button onClick={handleLogout}>Sair</button>
+              <Link href="/acesso-adm"><span className={styles.colorText}>Acesso Adm</span></Link>
+              <Link href="/suporte"><span className={styles.colorText}>Suporte</span></Link>
+              <button onClick={handleLogout}><span className={styles.colorText}>Sair</span></button>
             </nav>
           </div>
         )}

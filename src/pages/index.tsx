@@ -1,15 +1,13 @@
-import Homepage from '@/components/specifics/Homepage'
+import LoginAccess from '@/components/specifics/LoginAccess'
 import Head from 'next/head'
 
 export default function Home() {
   return (
     <>
       <Head>
-        <title>Coordenadas Geográficas | Núcleo Ambiental</title>
+        <title>Login | Núcleo Ambiental</title>
       </Head>
-    <main>
-        <Homepage />
-    </main>
-    </>
+      <LoginAccess />     
+    </>    
   )
 }

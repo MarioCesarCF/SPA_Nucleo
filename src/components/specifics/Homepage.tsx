@@ -16,7 +16,7 @@ export default function Homepage() {
 
   useEffect(() => {   
     if (!token) {
-      router.push('/login');
+      router.push('/');
     } else {
       const fetchData = async () => {
         try {
@@ -61,7 +61,7 @@ export default function Homepage() {
     setCityFilter(newCityFilter);
   };
 
-  const handleDelete = async (companyId: any) => {
+  const handleDelete = async (companyId: any) => {    
     try {
       await fetch(`https://api-coordinates.onrender.com/company/${companyId}`, {
         method: "DELETE",
@@ -70,7 +70,8 @@ export default function Homepage() {
           Authorization: `Bearer ${token}`
         }
       })
-
+      
+      alert("Registro excluído com sucesso.")
       window.location.reload();
     } catch (error) {
       alert(`Erro ao excluir a empresa: ${error}`);
@@ -91,15 +92,25 @@ export default function Homepage() {
     window.open(urlMaps, '_blank');
   };
 
+  const formatDocument = (document: string): string => {
+    if (document.length === 11) {
+      return `${document.substring(0, 3)}.${document.substring(3, 6)}.${document.substring(6, 9)}-${document.substring(9)}`;
+    } else if (document.length === 14) {
+      return `${document.substring(0, 2)}.${document.substring(2, 5)}.${document.substring(5, 8)}/${document.substring(8, 12)}-${document.substring(12)}`;
+    } else {
+      return document;
+    }
+  };
+
   return (
     <div className={styles.pageContainer}>
       <div>
         <main className={styles.main}>
           <div className={styles.login_form}>
 
-            <button className={styles.btn_cadastrar} onClick={() => router.push(`/cadastrar`)}>Cadastrar novo cliente</button>
+            <button className={styles.btn_cadastrar} onClick={() => router.push(`/cadastrar`)} title="Botão para cadastrar novo empreendimento">Cadastrar novo empreendimento</button>
             <div className="">
-              <h1 className="d-flex justify-content-center mt-5 mb-5 display-5">PESQUISAR CLIENTES</h1>
+              <h1 className="d-flex justify-content-center mt-5 mb-5 display-5">PESQUISAR EMPREENDIMENTOS</h1>
               <form>
                 <div className={styles.form_group}>
                   <div className="form-group col-md-2 offset-md-2">
@@ -138,6 +149,7 @@ export default function Homepage() {
                 </thead>
                 <tbody>
                   {companies.map((company) => (
+                    
                     <tr key={company.id}>
                       <td className={styles.actions}>
                         <button onClick={() => handleNavigation(company.coordinatesX, company.coordinatesY)} className={styles.btn_icon}><i className="fa-solid fa-location-dot" title="Visite o ponto no Google Maps."></i></button>
@@ -146,7 +158,7 @@ export default function Homepage() {
                         <button onClick={() => handleViewDetails(company.id)} className={styles.btn_icon}><i className="fa-solid fa-eye" title="Confira as informações da empresa."></i></button>
                       </td>
                       <td className={styles.actions}>{company.name}</td>
-                      <td className={styles.actions}>{company.document}</td>
+                      <td className={styles.actions}>{company.document && formatDocument(company.document)}</td>
                       <td className={styles.actions}>{company.city}</td>
                       <td className={styles.actions}>{company.coordinatesX}</td>
                       <td className={styles.actions}>{company.coordinatesY}</td>
