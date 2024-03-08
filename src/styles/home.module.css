@@ -77,11 +77,11 @@
   }
   
   .actions {
-    width: 10%;
+    width: 12%;
   }  
 
   .actions>button>i:hover {
-    background-color: #cef6a3;
+    background-color: #c1db00;
   }
   
   /* Estilo para tornar a tabela responsiva */

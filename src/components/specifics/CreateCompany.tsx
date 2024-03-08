@@ -90,7 +90,7 @@ export default function CreateCompany() {
     <div>
       <button className={style.btn_return_home} onClick={() => router.push(`/home`)}><i className="fa-solid fa-house" title="Botão para voltar à página principal."></i></button>
       <div className={style.titleCadastro}>
-        <h1>Formulário para cadastro de empresa</h1>
+        <h1>Formulário para cadastro de empreendimentos</h1>
       </div>
 
       <div className={style.background}>
@@ -124,6 +124,7 @@ export default function CreateCompany() {
                 <label htmlFor="inputInfos">INFORMAÇÕES GERAIS</label>
                 <textarea className={style.textarea} id="inputInfos" />
               </div>
+              
               <button type="submit" className={style.button}>Salvar</button>
             </form>
           </div>

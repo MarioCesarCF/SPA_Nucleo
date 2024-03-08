@@ -40,6 +40,7 @@ width: 3rem;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);    
     width: 70vw;
+    height: 50vh;
   }
   
   .center {
@@ -47,14 +48,15 @@ width: 3rem;
   }
   
   .form {
-    max-width: 1200px;
     margin: 0 auto;
   }
   
   .formGroup {
     margin-bottom: 20px;
     display: flex;
+    justify-content: space-between;
     gap: 10px;
+    flex-wrap: wrap;
   }
   
   .label {
@@ -71,13 +73,53 @@ width: 3rem;
   }
 
   .inputName {
-    width: 80%;
+    width: 90%;
     padding: 5px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
   }
-  
+
+  .inputDoc {
+    width: 20%;
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .inputCity {
+    width: 20%;
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .inputNumber {
+    width: 20%;
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .inputCoordX {
+    width: 30%;
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .inputCoordY {
+    width: 30%;
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
   .button {
     background-color: #007bff;
     color: #fff;
@@ -86,6 +128,7 @@ width: 3rem;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    margin-top: 5rem;
   }
   
   .button:hover {

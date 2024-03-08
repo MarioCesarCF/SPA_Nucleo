@@ -11,6 +11,7 @@ width: 3rem;
 .btn_return_home:hover {
   border-color: #303132;
   background-color: #c1db00;
+  transition: 0.5s;
 }
 
 .btn_return_home>i {

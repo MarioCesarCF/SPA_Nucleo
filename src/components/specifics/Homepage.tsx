@@ -14,7 +14,7 @@ export default function Homepage() {
 
   const [companies, setCompanies] = useState<CompanyDTO[]>([]);
 
-  useEffect(() => {   
+  useEffect(() => {
     if (!token) {
       router.push('/');
     } else {
@@ -61,7 +61,7 @@ export default function Homepage() {
     setCityFilter(newCityFilter);
   };
 
-  const handleDelete = async (companyId: any) => {    
+  const handleDelete = async (companyId: any) => {
     try {
       await fetch(`https://api-coordinates.onrender.com/company/${companyId}`, {
         method: "DELETE",
@@ -70,7 +70,7 @@ export default function Homepage() {
           Authorization: `Bearer ${token}`
         }
       })
-      
+
       alert("Registro excluído com sucesso.")
       window.location.reload();
     } catch (error) {
@@ -148,23 +148,30 @@ export default function Homepage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {companies.map((company) => (
-                    
-                    <tr key={company.id}>
-                      <td className={styles.actions}>
-                        <button onClick={() => handleNavigation(company.coordinatesX, company.coordinatesY)} className={styles.btn_icon}><i className="fa-solid fa-location-dot" title="Visite o ponto no Google Maps."></i></button>
-                        <button onClick={() => handleEdit(company.id)} className={styles.btn_icon}><i className="fa-solid fa-arrows-rotate" title="Atualize os dados desta empresa."></i></button>
-                        <button onClick={() => handleDelete(company.id)} className={styles.btn_icon}><i className="fa-solid fa-trash" title="Exclua está empresa."></i></button>
-                        <button onClick={() => handleViewDetails(company.id)} className={styles.btn_icon}><i className="fa-solid fa-eye" title="Confira as informações da empresa."></i></button>
-                      </td>
-                      <td className={styles.actions}>{company.name}</td>
-                      <td className={styles.actions}>{company.document && formatDocument(company.document)}</td>
-                      <td className={styles.actions}>{company.city}</td>
-                      <td className={styles.actions}>{company.coordinatesX}</td>
-                      <td className={styles.actions}>{company.coordinatesY}</td>
-                      <td className="">{company.informations}</td>
-                    </tr>
-                  ))}
+                  {companies
+                    .sort((a, b) => {
+                      if (a.name && b.name) {
+                        return a.name.localeCompare(b.name);
+                      }
+                      return 0;
+                    })
+                    .map((company) => (
+
+                      <tr key={company.id}>
+                        <td className={styles.actions}>
+                          <button onClick={() => handleNavigation(company.coordinatesX, company.coordinatesY)} className={styles.btn_icon}><i className="fa-solid fa-location-dot" title="Visite o ponto no Google Maps."></i></button>
+                          <button onClick={() => handleEdit(company.id)} className={styles.btn_icon}><i className="fa-solid fa-arrows-rotate" title="Atualize os dados desta empresa."></i></button>
+                          <button onClick={() => handleDelete(company.id)} className={styles.btn_icon}><i className="fa-solid fa-trash" title="Exclua está empresa."></i></button>
+                          <button onClick={() => handleViewDetails(company.id)} className={styles.btn_icon}><i className="fa-solid fa-eye" title="Confira as informações da empresa."></i></button>
+                        </td>
+                        <td className={styles.actions}>{company.name}</td>
+                        <td className={styles.actions}>{company.document && formatDocument(company.document)}</td>
+                        <td className={styles.actions}>{company.city}</td>
+                        <td className={styles.actions}>{company.coordinatesX}</td>
+                        <td className={styles.actions}>{company.coordinatesY}</td>
+                        <td className="">{company.informations}</td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
             </div>

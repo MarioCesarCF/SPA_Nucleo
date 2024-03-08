@@ -119,7 +119,7 @@ export default function EditCompany({ companyId }: Props) {
     <div>
       <button className={style.btn_return_home} onClick={() => router.push(`/home`)}><i className="fa-solid fa-house" title="Botão para voltar à página principal."></i></button>
       <div className={style.titleCadastro}>
-      <h1>Formulário para atualização de dados da empresa</h1>
+      <h1>Formulário para atualização de dados do empreendimento</h1>
       </div>
       
       <div className={style.background}>

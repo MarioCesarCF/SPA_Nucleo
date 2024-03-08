@@ -1,6 +1,5 @@
 import ViewCompany from "@/components/specifics/ViewCompany";
 import Head from "next/head";
-import Link from "next/link";
 import { useRouter } from "next/router";
 
 export default function View() {
@@ -10,10 +9,9 @@ export default function View() {
   return (
     <>
       <Head>
-        <title>Empresa | Núcleo Ambiental</title>
+        <title>Empreendimento | Núcleo Ambiental</title>
       </Head>
       <ViewCompany companyId={id || ""} />     
-      <Link href="/">Voltar para a Página Inicial.</Link>
     </>
   );
 }
