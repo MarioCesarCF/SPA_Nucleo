@@ -3,6 +3,10 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { parseCookies } from 'nookies';
 import style from "@/styles/btn-return.module.css"
+import {config} from 'dotenv';
+config();
+
+const apiKey = process.env.API_KEY;
 
 type Props = {
   companyId: string | string[];
@@ -95,7 +99,7 @@ const ViewCompany = ({ companyId }: Props) => {
               <iframe
                 width="400"
                 height="300"
-                src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBnAjq1AWPM5IRs6mrnw1QKJsOSy9IOSUo&zoom=11&q=${companyData.coordinatesX},${companyData.coordinatesY}`}
+                src={`https://www.google.com/maps/embed/v1/place?key=${apiKey}&zoom=11&q=${companyData.coordinatesX},${companyData.coordinatesY}`}
               ></iframe>
             </div>
           </div>
