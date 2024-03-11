@@ -2,9 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { parseCookies } from 'nookies';
-import style from "@/styles/btn-return.module.css"
-import {config} from 'dotenv';
-config();
+import style from "@/styles/viewpage.module.css";
 
 const apiKey = process.env.API_KEY;
 
@@ -72,27 +70,29 @@ const ViewCompany = ({ companyId }: Props) => {
     }
   };
 
+  const handleNavigation = (coordinatesX: number | undefined, coordinatesY: number | undefined) => {
+    var urlMaps = `https://www.google.com.br/maps/place/${coordinatesX},${coordinatesY}`;
+    window.open(urlMaps, '_blank');
+  };
+
   return (
     <div>
       <button className={style.btn_return_home} onClick={() => router.push(`/home`)}><i className="fa-solid fa-house" title="Botão para voltar à página principal."></i></button>
-      <div className="container">
-
-        <div className="row justify-content-center">
-          <div className="col-lg-8">
-
+      <div className={style.container}>
             <div>
-              <h1>{companyData.name}</h1>
+              <h1 className={style.title}>{companyData.name}</h1>
             </div>
             <br></br>
-            <h2>Informações cadastradas</h2>
-            <ol>
-              <li>Nome: {companyData.name}</li>
-              <li>Documento: {companyData.document && formatDocument(companyData.document)}</li>
-              <li>Cidade: {companyData.city}</li>
-              <li>Número Processo: {companyData.number_processo}</li>
-              <li>Coordenada X: {companyData.coordinatesX}</li>
-              <li>Coordenada Y: {companyData.coordinatesY}</li>
-              <li>Informações Gerais: {companyData.informations}</li>
+            <h2 className={style.subtitle}>Informações cadastradas</h2>
+            <br></br>
+            <ol className={style.lista}>
+              <li><strong>Nome:</strong> {companyData.name}</li>
+              <li><strong>Documento:</strong> {companyData.document && formatDocument(companyData.document)}</li>
+              <li><strong>Cidade:</strong> {companyData.city}</li>
+              <li><strong>Número Processo:</strong> {companyData.number_processo}</li>
+              <li><strong>Coordenada X:</strong> {companyData.coordinatesX}</li>
+              <li><strong>Coordenada Y:</strong> {companyData.coordinatesY}</li>
+              <li><strong>Informações Gerais: </strong> {companyData.informations}</li>
             </ol>
             <br></br>
             <div className="embed-responsive embed-responsive-16by9">
@@ -100,12 +100,10 @@ const ViewCompany = ({ companyId }: Props) => {
                 width="400"
                 height="300"
                 src={`https://www.google.com/maps/embed/v1/place?key=${apiKey}&zoom=11&q=${companyData.coordinatesX},${companyData.coordinatesY}`}
-              ></iframe>
+                onClick={() => handleNavigation(companyData.coordinatesX, companyData.coordinatesY)}></iframe>
             </div>
           </div>
         </div>
-      </div>
-    </div>
   );
 }
 

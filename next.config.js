@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig = {  
   reactStrictMode: true,
   images: {
     remotePatterns: [
@@ -10,7 +10,10 @@ const nextConfig = {
         pathname: '**',
       }
     ]
-  }
+  },
+  env: {
+    API_KEY: 'AIzaSyBnAjq1AWPM5IRs6mrnw1QKJsOSy9IOSUo',
+  },
 }
 
-module.exports = nextConfig
+module.exports = nextConfig;
