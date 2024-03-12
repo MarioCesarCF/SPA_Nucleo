@@ -6,6 +6,14 @@
     font-size: 25px;
 }
 
+.titleForm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  margin: 20px 0;
+}
+
 .btn_return_home {
   padding: 0.3rem;
 margin-top: 0.5rem;
@@ -31,7 +39,7 @@ width: 3rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 77vh;
+    height: 60vh;
   }
   
   .modal {
@@ -40,7 +48,7 @@ width: 3rem;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);    
     width: 70vw;
-    height: 50vh;
+    height: 45vh;
   }
   
   .center {
@@ -48,7 +56,7 @@ width: 3rem;
   }
   
   .form {
-    margin: 0 auto;
+    margin: 20px auto;
   }
   
   .formGroup {
@@ -59,9 +67,6 @@ width: 3rem;
     flex-wrap: wrap;
   }
   
-  .label {
-    margin-bottom: 5px;
-  }
   
   .input,
   .textarea {
@@ -128,7 +133,7 @@ width: 3rem;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    margin-top: 5rem;
+    margin-top: 2rem;
   }
   
   .button:hover {

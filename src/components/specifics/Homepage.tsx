@@ -110,7 +110,7 @@ export default function Homepage() {
 
             <button className={styles.btn_cadastrar} onClick={() => router.push(`/cadastrar`)} title="Botão para cadastrar novo empreendimento">Cadastrar novo empreendimento</button>
             <div className="">
-              <h1 className="d-flex justify-content-center mt-5 mb-5 display-5">PESQUISAR EMPREENDIMENTOS</h1>
+              <h1 className="d-flex justify-content-center mt-5 mb-5 display-5">EMPREENDIMENTOS</h1>
               <form>
                 <div className={styles.form_group}>
                   <div className="form-group col-md-2 offset-md-2">

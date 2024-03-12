@@ -1,3 +1,4 @@
+import SuportePage from "@/components/specifics/SuportePage";
 import Head from "next/head";
 
 export default function Suporte() {
@@ -6,7 +7,7 @@ export default function Suporte() {
       <Head>
         <title>Suporte | Núcleo Ambiental</title>
       </Head>
-      <h1>Suporte</h1>      
+      <SuportePage />    
     </>
   );
 }

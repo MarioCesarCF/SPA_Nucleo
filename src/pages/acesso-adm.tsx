@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
+import AdminPage from "@/components/specifics/AdminPage";
 
 export default function AcessoAdm() {
   return (
@@ -7,7 +8,7 @@ export default function AcessoAdm() {
       <Head>
         <title>Acesso Adm | Núcleo Ambiental</title>
       </Head>
-      <h1>Acesso Adm</h1>
+      <AdminPage />
     </>
   );
 }

@@ -70,11 +70,6 @@ const ViewCompany = ({ companyId }: Props) => {
     }
   };
 
-  const handleNavigation = (coordinatesX: number | undefined, coordinatesY: number | undefined) => {
-    var urlMaps = `https://www.google.com.br/maps/place/${coordinatesX},${coordinatesY}`;
-    window.open(urlMaps, '_blank');
-  };
-
   return (
     <div>
       <button className={style.btn_return_home} onClick={() => router.push(`/home`)}><i className="fa-solid fa-house" title="Botão para voltar à página principal."></i></button>
@@ -96,11 +91,11 @@ const ViewCompany = ({ companyId }: Props) => {
             </ol>
             <br></br>
             <div className="embed-responsive embed-responsive-16by9">
-              <iframe
-                width="400"
-                height="300"
+              <iframe 
+                width="320"
+                height="200"
                 src={`https://www.google.com/maps/embed/v1/place?key=${apiKey}&zoom=11&q=${companyData.coordinatesX},${companyData.coordinatesY}`}
-                onClick={() => handleNavigation(companyData.coordinatesX, companyData.coordinatesY)}></iframe>
+                ></iframe>
             </div>
           </div>
         </div>

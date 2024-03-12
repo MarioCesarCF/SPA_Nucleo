@@ -96,8 +96,6 @@ export default function CreateCompany() {
       <div className={style.background}>
         <div className={style.modal}>
           <div className={style.center}>
-
-
             <form className={style.form} onSubmit={handleSubmit}>
               <div className={style.formGroup}>
                 <label htmlFor="inputName">NOME *</label>
