@@ -67,10 +67,15 @@ export function UserProvider({ children }: any) {
         throw new Error('E-mail ou senha inválidos. Login falhou.');
       }
 
-      const { token } = await response.json();
+      const data = await response.json();
+      const token = data?.data?.token;
 
+      if (!token) {
+        throw new Error('Token não encontrado na resposta da API');
+      }
+      
       const userDataResponse = await fetch(`${apiURL}/user/email/${email}`, {
-        method: 'GET'
+        method: 'GET',
       });
 
       if (!userDataResponse.ok) {

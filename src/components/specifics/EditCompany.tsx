@@ -78,7 +78,7 @@ export default function EditCompany({ companyId }: Props) {
   
       if (response.ok) {  
         alert('Dados salvos com sucesso!');
-        router.push("/home");
+        //router.push("/home");
       } else {
         const errorData = await response.json();    
         alert(`Erro ao salvar os dados: ${errorData.message}`);

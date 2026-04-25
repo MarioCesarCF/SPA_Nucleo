@@ -1,4 +1,4 @@
-import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { parseCookies } from 'nookies';
@@ -92,8 +92,9 @@ const ViewCompany = ({ companyId }: Props) => {
             <br></br>
             <div className="embed-responsive embed-responsive-16by9">
               <iframe 
-                width="320"
-                height="200"
+                width="600"
+                height="400"
+                className={style.map}          
                 src={`https://www.google.com/maps/embed/v1/place?key=${apiKey}&zoom=11&q=${companyData.coordinatesX},${companyData.coordinatesY}`}
                 ></iframe>
             </div>
